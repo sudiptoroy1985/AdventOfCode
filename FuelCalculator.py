@@ -1,17 +1,13 @@
-class FuelCalculator:
-    def __init__(self, masses):
-        self.masses = masses
-    
-    def calculate(self):
-        massesList=list(self.masses)
-        total=0
-        for mass in massesList:
-            total = (mass/3)-2 + total
-        return total
 
+def calculateFuel(mass, previous):
+ fuel=(mass/3)-2
+ if(fuel > 0):
+     return calculateFuel(fuel, previous + fuel)
+ else:
+     return previous
+       
 
-
-calc = FuelCalculator([118868,
+masses=[118868,
 88841,
 133680,
 148066,
@@ -110,5 +106,9 @@ calc = FuelCalculator([118868,
 50488,
 67943,
 79677,
-94858])
-print(calc.calculate())
+94858]
+
+total=0
+for mass in masses:
+  total=calculateFuel(mass,0)+total
+print(total)
